@@ -9,23 +9,23 @@ $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["uploadfile"]["name"]);
 $uploadOk = 1;
 if (file_exists($target_file)) {
-	echo "Sorry, file already exists.";
+	//echo "Sorry, file already exists.";
 	$uploadOk = 0;
 }
 if ($uploadOk == 0) {
-	echo "Sorry, your file was not uploaded.";
+	//echo "Sorry, your file was not uploaded.";
 } else {
 	if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $target_file)) {
-		echo "The file ". basename($_FILES["uploadfile"]["name"]). " has been uploaded.";
+		//echo "The file ". basename($_FILES["uploadfile"]["name"]). " has been uploaded.";
 	}
 	else {
-		echo "Sorry, there was an error uploading your file.";
+		//echo "Sorry, there was an error uploading your file.";
 	}
 }
 $output = fopen("out.txt","w") or die("Unable to open output file!");
 
-#exec("./a.out -min $min -max $max $sort -order $order $target_file", $out);
-exec("./a.out",$out);
+exec("./a.out -min $min -max $max $sort -order $order $target_file", $out);
+#exec("./a.out",$out);
 $len = count($out);
 if ($screen) {
 	for ($x = 0; $x < $len; $x++) {
@@ -34,7 +34,6 @@ if ($screen) {
 	}
 	$file="out.txt";
 	if (file_exists($file)) {
-	#header("Content-Disposition: attachment; filename=\"" . basename($file) . "\"");
     header("Content-Type: application/force-download");
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
     header('Content-Length: ' . filesize($file));
